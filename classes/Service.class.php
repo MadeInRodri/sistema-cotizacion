@@ -1,6 +1,6 @@
 <?php
 
-class Service {
+class Service implements JsonSerializable {
     //Mis propiedades
     private $id;
     private $name;
@@ -16,38 +16,17 @@ class Service {
         $this->description = $description;
         $this->price = $price;
         $this->category = $category;
+        $this->quantity = 1;
     }
 
-    public function getId(){
-        return $this->id;
-    }
-
-    public function getName(){
-        return $this->name;
-    }
-
-    public function getDescription(){
-        return $this->description;
-    }
-
-    public function getPrice(){
-        return $this->price;
-    }
-
-    public function getCategory(){
-        return $this->category;
-    }
-    public function getQuantity(){
-        return $this->quantity;
-    }
-
-    public function setQuantity($quantity){
-        $this->quantity = $quantity;
-    }
-
-    public function getSubtotal(){
-        return $this->price * $this->quantity;
-    }
+    public function getId(){ return $this->id; }
+    public function getName(){ return $this->name; }
+    public function getDescription(){ return $this->description; }
+    public function getPrice(){ return $this->price; }
+    public function getCategory(){ return $this->category; }
+    public function getQuantity(){ return $this->quantity; }
+    public function setQuantity($quantity){$this->quantity = $quantity; }
+    public function getSubtotal(){ return $this->price * $this->quantity; }
 
 
     //Función para encontrar el servicio y devolver una intancia
@@ -75,7 +54,28 @@ class Service {
         }
         return null;
     }
+    
+    public static function getServices(){
+        $json = __DIR__ . "/../assets/services.json";
 
+        if (!file_exists($json)) return null;
+
+        $jsonData = file_get_contents($json);
+        $services = json_decode($jsonData,true);
+
+        return $services;
+    }
+
+    //Para pasar los datos con json_encode()
+    public function jsonSerialize() {
+        return [
+            'id'          => $this->getId(),
+            'name'        => $this->getName(),        // Podemos usar el getter
+            'description' => $this->getDescription(),     // O la propiedad directo (aquí sí se puede)
+            'price'       => $this->getPrice(),
+            'category'    => $this->getCategory(),
+            'quantity'    => $this->getQuantity(),
+            'subtotal'    => $this->getSubtotal()    // ¡Incluso podemos enviar datos calculados!
+        ];
+    }
 }
-
-?>

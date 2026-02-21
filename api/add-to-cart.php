@@ -22,8 +22,13 @@ if (isset($_SESSION['quote_services'][$id])) {
     // Si ya existe, recuperamos el objeto y aumentamos su cantidad
     $currentQuantity = $_SESSION['quote_services'][$id]->getQuantity();
 
+    if($currentQuantity >= 10){
+         http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Límite alcanzado. No puedes cotizar más de 10 unidades de este servicio."]);
+    exit;
+    }
+
     $_SESSION['quote_services'][$id]->setQuantity($currentQuantity + 1);
-    
     $service = $_SESSION['quote_services'][$id];
 } else {
     // Si no existe, lo buscamos y lo agregamos por primera vez
