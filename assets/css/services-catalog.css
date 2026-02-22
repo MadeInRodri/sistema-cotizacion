@@ -318,6 +318,10 @@ nav {
     color var(--transition-base);
 }
 
+.list-btn {
+  left: 2rem;
+}
+
 .cart-toggle:hover {
   background-color: var(--color-white);
   color: var(--color-black);
@@ -418,6 +422,10 @@ nav {
 .products-view {
   font-family: var(--font-primary);
   min-height: 100vh;
+}
+
+table {
+  font-family: var(--font-primary);
 }
 
 .table-card {

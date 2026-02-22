@@ -36,6 +36,10 @@
         <i class="fa-solid fa-cart-shopping"></i>
     </button>
 
+    <button class="cart-toggle list-btn" onclick="redirectList()">
+        <i class="fa-solid fa-table-list"></i>
+    </button>
+
     <aside id="shopping-cart" class="cart-sidebar">
         <div class="cart-header">
             <h3>Tu Carrito</h3>

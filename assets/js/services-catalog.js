@@ -1,7 +1,6 @@
 console.log("Working!");
 
-//ALERTAS
-
+// ALERTAS
 const cartAlert = () => {
   Swal.fire({
     title: "¡Enhorabuena!",
@@ -22,39 +21,19 @@ const buyMinAlert = () => {
   });
 };
 
-const buyMaxAlert = () => {
-  Swal.fire({
-    title: "¡Carro lleno!",
-    text: "Has sobrepasado el límite de items que puedes agregar",
-    icon: "error",
-    timer: 2000,
-    timerProgressBar: true,
-  });
-};
-
-const genericErrorAlert = (message) => {
+const genericErrorAlert = (mensaje) => {
   Swal.fire({
     title: "¡Error!",
-    text: `${message}`,
+    text: `${mensaje}`,
     icon: "error",
-    timer: 2000,
+    timer: 3000,
     timerProgressBar: true,
   });
 };
 
-const genericSuccessAlert = () => {
-  Swal.fire({
-    title: "¡Enhorabuena!",
-    text: "El item ha sido añadido al carrito",
-    icon: "success",
-    timer: 2000,
-    timerProgressBar: true,
-  });
-};
+// OBTENER LA DATA DE LA API
 
-//OBTENER LA DATA DE LA API
-
-//SERVICIOS
+// SERVICIOS
 const getServicesData = async () => {
   try {
     let url = "../api/get-services.php";
@@ -68,7 +47,7 @@ const getServicesData = async () => {
   }
 };
 
-//CARRITO EN SESSION
+// CARRITO EN SESSION
 const getCartData = async () => {
   try {
     let url = "../api/get-cart.php";
@@ -81,7 +60,7 @@ const getCartData = async () => {
   }
 };
 
-//AGREGAR AL CARRITO
+// AGREGAR AL CARRITO
 const addToCart = async (serviceId, isInCart = false) => {
   let url = "../api/add-to-cart.php";
 
@@ -91,11 +70,10 @@ const addToCart = async (serviceId, isInCart = false) => {
       headers: {
         "Content-Type": "application/json",
       },
-      // Enviamos el ID en el cuerpo de la petición
+
       body: JSON.stringify({ id: serviceId }),
     });
 
-    // Verificamos si hubo un error de servidor (404, 500, etc)
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Error al agregar al carrito");
@@ -104,7 +82,6 @@ const addToCart = async (serviceId, isInCart = false) => {
     const data = await response.json();
 
     if (data.status === "success") {
-      console.log(data);
       await fillCart();
       if (!isInCart) {
         cartAlert();
@@ -116,7 +93,7 @@ const addToCart = async (serviceId, isInCart = false) => {
   }
 };
 
-//DECREMENTAR EN EL CARRITO
+// DECREMENTAR EN EL CARRITO
 const decreaseQuantity = async (serviceId) => {
   try {
     const response = await fetch("../api/update-cart.php", {
@@ -128,17 +105,14 @@ const decreaseQuantity = async (serviceId) => {
     const data = await response.json();
 
     if (data.status === "success") {
-      console.log(data.message);
       await fillCart();
-    } else {
-      console.log(data);
     }
   } catch (error) {
     console.error("Error al actualizar cantidad:", error);
   }
 };
 
-//REMOVER ITEM DEL CARRITO
+// REMOVER ITEM DEL CARRITO
 const removeFromCart = async (serviceId) => {
   try {
     const response = await fetch("../api/remove-from-cart.php", {
@@ -150,17 +124,14 @@ const removeFromCart = async (serviceId) => {
     const data = await response.json();
 
     if (data.status === "success") {
-      console.log(data);
       await fillCart();
-    } else {
-      console.log(data);
     }
   } catch (error) {
     console.error("Error al actualizar cantidad:", error);
   }
 };
 
-//LLENAR LOS SERVICIOS EN PANTALLA
+// LLENAR LOS SERVICIOS EN PANTALLA
 const fillServices = async (category = null) => {
   await getServicesData();
 
@@ -195,10 +166,9 @@ const fillServices = async (category = null) => {
     .join("");
 
   cardsContainer.innerHTML = servicesCards;
-  //console.log(servicesCards);
 };
 
-//ACTUALIZAR CARRITO
+// ACTUALIZAR CARRITO
 const fillCart = async () => {
   try {
     const data = await getCartData();
@@ -216,7 +186,7 @@ const fillCart = async () => {
             <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
           </div>
           <div class="item-actions">
-          <button class="action add-item" onclick="decreaseQuantity(${item.id})">
+            <button class="action add-item" onclick="decreaseQuantity(${item.id})">
               <i class="fa-solid fa-caret-left"></i>
             </button>
             <button class="action remove-item" onclick="removeFromCart(${item.id})">
@@ -238,12 +208,11 @@ const fillCart = async () => {
   }
 };
 
-//EJECUCIÓN DE MÉTODOS
+// EJECUCIÓN INICIAL
 fillServices();
 fillCart();
 
-//MANEJO DEL CARRITO
-
+// MANEJO DEL CARRITO (SIDEBAR)
 const toggleCart = () => {
   const cart = document.getElementById("shopping-cart");
   const overlay = document.getElementById("cart-overlay");
@@ -252,19 +221,60 @@ const toggleCart = () => {
   overlay.classList.toggle("active");
 };
 
+// REDIRECCION AL HISTORIAL
+
+const redirectList = () => {
+  window.location.href = "view-quotes.php";
+};
+
 // Abrir el modal desde el botón del carrito
 document.querySelector(".checkout-btn").addEventListener("click", () => {
+  const cartItems = document.querySelector(".cart-items").children.length;
+  if (cartItems === 0) {
+    buyMinAlert();
+    return;
+  }
   document.getElementById("quote-modal").style.display = "flex";
 });
 
-// Manejar el envío del formulario
-document.getElementById("quote-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+// === CORRECCIÓN AQUÍ: MANEJO REAL DEL FORMULARIO HACIA EL BACKEND ===
+document
+  .getElementById("quote-form")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  console.log("Datos enviados, redirigiendo...");
+    // Recolectar datos de los inputs según el HTML que tienes
+    const datosFormulario = {
+      nombre: this.querySelector('input[placeholder="Ej. Rodrigo Mejía"]')
+        .value,
+      empresa: this.querySelector('input[placeholder="Ej. Apple"]').value,
+      correo: this.querySelector('input[type="email"]').value,
+    };
 
-  window.location.href = "tabla.html";
-});
+    try {
+      // Enviar datos al endpoint process-quote.php
+      const response = await fetch("../api/process-quote.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datosFormulario),
+      });
+
+      const resultado = await response.json();
+
+      if (resultado.status === "success") {
+        // Si el backend responde éxito, redirigimos a la tabla con el código generado
+        window.location.href = `view-table-quote.php?codigo=${resultado.codigo}`;
+      } else {
+        // Mostrar el error enviado por PHP (ej. carrito vacío o menos de $100)
+        genericErrorAlert(resultado.mensaje);
+      }
+    } catch (error) {
+      console.error("Error al procesar la cotización:", error);
+      genericErrorAlert(
+        "Hubo un fallo en el servidor al generar la cotización.",
+      );
+    }
+  });
 
 // Cerrar modal si se hace clic fuera del contenido
 window.onclick = function (event) {
