@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "nombre": "Landing Page",
+    "descripcion": "Diseño de una página optimizada para captación de leads y conversiones.",
+    "precio_base": 250,
+    "categoria": "Web"
+  },
+  {
+    "id": 2,
+    "nombre": "E-commerce Starter",
+    "descripcion": "Tienda online básica con pasarela de pagos y gestión de inventario.",
+    "precio_base": 1200,
+    "categoria": "Web"
+  },
+  {
+    "id": 3,
+    "nombre": "Portafolio Profesional",
+    "descripcion": "Sitio web personalizado para profesionales y creativos.",
+    "precio_base": 450,
+    "categoria": "Web"
+  },
+  {
+    "id": 4,
+    "nombre": "Dashboard Administrativo",
+    "descripcion": "Panel de control interno para la gestión de datos y métricas.",
+    "precio_base": 850,
+    "categoria": "Web"
+  },
+  {
+    "id": 5,
+    "nombre": "Blog Corporativo",
+    "descripcion": "Sistema de gestión de contenidos (CMS) para publicación de artículos.",
+    "precio_base": 600,
+    "categoria": "Web"
+  },
+  {
+    "id": 6,
+    "nombre": "API REST Personalizada",
+    "descripcion": "Desarrollo de endpoints seguros y escalables para aplicaciones.",
+    "precio_base": 500,
+    "categoria": "Backend"
+  },
+  {
+    "id": 7,
+    "nombre": "Integración de Base de Datos",
+    "descripcion": "Diseño y optimización de esquemas relacionales o NoSQL.",
+    "precio_base": 400,
+    "categoria": "Backend"
+  },
+  {
+    "id": 8,
+    "nombre": "Sistema de Autenticación",
+    "descripcion": "Implementación de login seguro mediante JWT u OAuth2.",
+    "precio_base": 300,
+    "categoria": "Backend"
+  },
+  {
+    "id": 9,
+    "nombre": "Procesamiento de Pagos",
+    "descripcion": "Integración técnica con plataformas como Stripe o PayPal.",
+    "precio_base": 350,
+    "categoria": "Backend"
+  },
+  {
+    "id": 10,
+    "nombre": "Arquitectura de Microservicios",
+    "descripcion": "Diseño de sistemas distribuidos para procesos complejos.",
+    "precio_base": 950,
+    "categoria": "Backend"
+  },
+  {
+    "id": 11,
+    "nombre": "App Híbrida iOS/Android",
+    "descripcion": "Desarrollo multiplataforma eficiente utilizando React Native.",
+    "precio_base": 1500,
+    "categoria": "Mobile"
+  },
+  {
+    "id": 12,
+    "nombre": "Mantenimiento de App",
+    "descripcion": "Servicio de actualización de librerías y corrección de errores.",
+    "precio_base": 300,
+    "categoria": "Mobile"
+  },
+  {
+    "id": 13,
+    "nombre": "Notificaciones Push",
+    "descripcion": "Configuración de sistema de alertas y mensajes en tiempo real.",
+    "precio_base": 200,
+    "categoria": "Mobile"
+  },
+  {
+    "id": 14,
+    "nombre": "Diseño UI/UX Mobile",
+    "descripcion": "Prototipado y diseño de interfaces centradas en el usuario móvil.",
+    "precio_base": 400,
+    "categoria": "Mobile"
+  },
+  {
+    "id": 15,
+    "nombre": "Integración de Mapas",
+    "descripcion": "Servicios de geolocalización y trazado de rutas en tiempo real.",
+    "precio_base": 450,
+    "categoria": "Mobile"
+  },
+  {
+    "id": 16,
+    "nombre": "Despliegue en Docker",
+    "descripcion": "Contenerización de aplicaciones para entornos consistentes.",
+    "precio_base": 350,
+    "categoria": "DevOps"
+  },
+  {
+    "id": 17,
+    "nombre": "CI/CD Pipelines",
+    "descripcion": "Automatización total de procesos de prueba y despliegue.",
+    "precio_base": 500,
+    "categoria": "DevOps"
+  },
+  {
+    "id": 18,
+    "nombre": "Configuración de AWS",
+    "descripcion": "Configuración de infraestructura cloud y escalado automático.",
+    "precio_base": 700,
+    "categoria": "DevOps"
+  },
+  {
+    "id": 19,
+    "nombre": "Monitoreo de Servidores",
+    "descripcion": "Implementación de métricas de rendimiento y alertas de salud.",
+    "precio_base": 250,
+    "categoria": "DevOps"
+  },
+  {
+    "id": 20,
+    "nombre": "Orquestación con Kubernetes",
+    "descripcion": "Gestión avanzada de clústeres y réplicas de servicios.",
+    "precio_base": 1200,
+    "categoria": "DevOps"
+  }
+]
