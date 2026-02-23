@@ -237,13 +237,13 @@ document.querySelector(".checkout-btn").addEventListener("click", () => {
   document.getElementById("quote-modal").style.display = "flex";
 });
 
-// === CORRECCIÓN AQUÍ: MANEJO REAL DEL FORMULARIO HACIA EL BACKEND ===
+// MANEJO REAL DEL FORMULARIO HACIA EL BACKEND
 document
   .getElementById("quote-form")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Recolectar datos de los inputs según el HTML que tienes
+    // Recolectar datos
     const datosFormulario = {
       nombre: this.querySelector('input[placeholder="Ej. Rodrigo Mejía"]')
         .value,
@@ -265,7 +265,7 @@ document
         // Si el backend responde éxito, redirigimos a la tabla con el código generado
         window.location.href = `view-table-quote.php?codigo=${resultado.codigo}`;
       } else {
-        // Mostrar el error enviado por PHP (ej. carrito vacío o menos de $100)
+        // Mostrar el error
         genericErrorAlert(resultado.mensaje);
       }
     } catch (error) {
